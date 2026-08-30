@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bless Digital Lab | Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            min-height: 100vh;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        .slide-up { animation: slideUp 0.6s ease-out; }
+        .glass-card {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        .input-field {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            outline: none;
+        }
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="text-gray-200 antialiased">
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 left-10 w-64 sm:w-96 h-64 sm:h-96 bg-[#00d4ff]/5 rounded-full blur-3xl float-animation"></div>
+            <div class="absolute bottom-10 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/5 rounded-full blur-3xl float-animation" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="relative z-10 w-full max-w-md">
+            <div class="text-center mb-6 sm:mb-8">
+                <a href="index.html" class="inline-flex items-center gap-2 group">
+                    <i class="fas fa-cube text-2xl sm:text-3xl text-[#00d4ff]"></i>
+                    <span class="text-white font-bold text-xl sm:text-2xl">BLESS<span class="text-[#00d4ff] ml-1">LAB</span></span>
+                </a>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Secure Client Portal</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 sm:p-8 slide-up">
+                <div class="flex gap-2 mb-6 bg-[#0f0f0f]/50 p-1 rounded-xl">
+                    <button id="loginTab" class="flex-1 py-2.5 px-4 rounded-lg font-medium text-sm sm:text-base transition-all duration-300 bg-[#00d4ff] text-black">
+                        Sign In
+                    </button>
+                    <button id="signupTab" class="flex-1 py-2.5 px-4 rounded-lg font-medium text-sm sm:text-base transition-all duration-300 text-gray-400 hover:text-white">
+                        Sign Up
+                    </button>
+                </div>
+                <div id="loginForm">
+                    <form id="login-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">
+                                <i class="far fa-envelope mr-2 text-[#00d4ff]"></i>Email Address
+                            </label>
+                            <input type="email" id="loginEmail" placeholder="you@example.com" 
+                                   class="input-field w-full px-4 py-2.5 sm:py-3 rounded-lg text-white text-sm sm:text-base placeholder-gray-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">
+                                <i class="fas fa-lock mr-2 text-[#00d4ff]"></i>Password
+                            </label>
+                            <input type="password" id="loginPassword" placeholder="••••••••" 
+                                   class="input-field w-full px-4 py-2.5 sm:py-3 rounded-lg text-white text-sm sm:text-base placeholder-gray-500" required>
+                        </div>
+                        <button type="submit" class="w-full bg-[#00d4ff] hover:bg-[#00b8e6] text-black font-semibold py-2.5 sm:py-3 rounded-lg transition-all duration-300">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                        </button>
+                        <p class="text-center text-xs text-gray-500">
+                            <button type="button" onclick="netlifyIdentity.open('recover')" class="text-[#00d4ff] hover:underline">
+                                Forgot Password?
+                            </button>
+                        </p>
+                    </form>
+                </div>
+                <div id="signupForm" class="hidden">
+                    <form id="signup-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">
+                                <i class="far fa-user mr-2 text-[#00d4ff]"></i>Full Name
+                            </label>
+                            <input type="text" id="signupName" placeholder="Full Name" 
+                                   class="input-field w-full px-4 py-2.5 sm:py-3 rounded-lg text-white text-sm sm:text-base placeholder-gray-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">
+                                <i class="far fa-envelope mr-2 text-[#00d4ff]"></i>Email Address
+                            </label>
+                            <input type="email" id="signupEmail" placeholder="you@example.com" 
+                                   class="input-field w-full px-4 py-2.5 sm:py-3 rounded-lg text-white text-sm sm:text-base placeholder-gray-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5">
+                                <i class="fas fa-lock mr-2 text-[#00d4ff]"></i>Password
+                            </label>
+                            <input type="password" id="signupPassword" placeholder="Create a strong password" 
+                                   class="input-field w-full px-4 py-2.5 sm:py-3 rounded-lg text-white text-sm sm:text-base placeholder-gray-500" required>
+                        </div>
+                        <button type="submit" class="w-full bg-[#00d4ff] hover:bg-[#00b8e6] text-black font-semibold py-2.5 sm:py-3 rounded-lg transition-all duration-300">
+                            <i class="fas fa-user-plus mr-2"></i>Create Account
+                        </button>
+                    </form>
+                </div>
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-700"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs">
+                        <span class="px-3 bg-[#1a1a1a]/70 text-gray-400">Or continue with</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="loginWithProvider('google')" class="social-btn flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-gray-700 rounded-lg py-2.5">
+                        <i class="fab fa-google text-[#ea4335]"></i>
+                        <span class="text-sm">Google</span>
+                    </button>
+                    <button onclick="loginWithProvider('github')" class="social-btn flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-gray-700 rounded-lg py-2.5">
+                        <i class="fab fa-github text-white"></i>
+                        <span class="text-sm">GitHub</span>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center mt-6 text-xs text-gray-500">
+                <a href="index.html" class="hover:text-[#00d4ff] transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        netlifyIdentity.init();
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('bg-[#00d4ff]', 'text-black');
+            loginTab.classList.remove('text-gray-400');
+            signupTab.classList.remove('bg-[#00d4ff]', 'text-black');
+            signupTab.classList.add('text-gray-400');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+        });
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('bg-[#00d4ff]', 'text-black');
+            signupTab.classList.remove('text-gray-400');
+            loginTab.classList.remove('bg-[#00d4ff]', 'text-black');
+            loginTab.classList.add('text-gray-400');
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        });
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                const user = await netlifyIdentity.currentUser();
+                if (user) await user.logout();
+                const loggedInUser = await netlifyIdentity.login({ email: email, password: password });
+                if (loggedInUser) {
+                    window.location.href = 'landing.html';
+                }
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        });
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            try {
+                const user = await netlifyIdentity.signup({ email: email, password: password, user_metadata: { full_name: name } });
+                alert('Account created! Please check your email to confirm.');
+                loginTab.click();
+            } catch (error) {
+                alert('Signup failed: ' + error.message);
+            }
+        });
+        function loginWithProvider(provider) {
+            netlifyIdentity.open('login', { provider: provider });
+        }
+        netlifyIdentity.on('login', user => {
+            window.location.href = 'landing.html';
+        });
+        netlifyIdentity.on('init', user => {
+            if (user) {
+                window.location.href = 'landing.html';
+            }
+        });
+    </script>
+</body>
+</html>
